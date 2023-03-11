@@ -1,0 +1,10 @@
+name: Image Rekognition
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build the code
+        run: echo "Building the code...."
+      - name: Testing the code build
+        run: echo "Checking the build file..."

@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "https://e3tm4fm66l.execute-api.ap-southeast-1.amazonaws.com/dev",
+    "target": "http://localhost:8080/v1/",
     "secure": false,
     "logLevel": "debug"
   }

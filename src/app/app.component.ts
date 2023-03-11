@@ -37,24 +37,39 @@ export class AppComponent {
         fileSource: file,
       });
 
-      console.log(event.target.files);
+      console.log('File already present in the board: ' + this.imgSrc);
     }
   }
 
   submit() {
-    const formData = new FormData();
-    formData.append('file', this.myForm.get('fileSource')?.value);
-    console.error(this.myForm.get('fileSource')?.value);
     this.http
-      .put('http://locahost:4200/api/sample-bk1/example-test.jpeg', formData)
-      .subscribe(
-        (res) => {
-          console.log(res);
-          alert('Uploaded Successfully.');
+      .post<any>('http://localhost:8080/v1/rekognize', {
+        imgData: this.imgSrc,
+      })
+      .subscribe({
+        next: (data) => {
+          console.log(data);
         },
-        (err) => {
-          console.log(formData);
-        }
-      );
+        error: (error) => {
+          // this.errorMessage = error.message;
+          console.error('There was an error!', error);
+        },
+      });
+
+    // Upload from web.
+    // const formData = new FormData();
+    // formData.append('file', this.myForm.get('fileSource')?.value);
+    // console.error(this.myForm.get('fileSource')?.value);
+    // this.http
+    //   .put('http://locahost:4200/api/sample-bk1/example-test.jpeg', formData)
+    //   .subscribe(
+    //     (res) => {
+    //       console.log(res);
+    //       alert('Uploaded Successfully.');
+    //     },
+    //     (err) => {
+    //       console.log(formData);
+    //     }
+    //   );
   }
 }
